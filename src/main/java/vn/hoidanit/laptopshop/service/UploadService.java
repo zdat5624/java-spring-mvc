@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.ServletContext;
@@ -15,11 +14,14 @@ import jakarta.servlet.ServletContext;
 public class UploadService {
     private final ServletContext servletContext;
 
-    public UploadService(ServletContext servletContext) {
+    public UploadService(
+            ServletContext servletContext) {
+
         this.servletContext = servletContext;
     }
 
-    public String handleSaveUploadFile(@RequestParam("hoidanitFile") MultipartFile file, String targetFolder) {
+    public String handleSaveUploadFile(MultipartFile file, String targetFolder) {
+        // relative path: absolute path
         String rootPath = this.servletContext.getRealPath("/resources/images");
         String finalName = "";
         try {
@@ -31,7 +33,9 @@ public class UploadService {
 
             // Create the file on server
             finalName = System.currentTimeMillis() + "-" + file.getOriginalFilename();
+
             File serverFile = new File(dir.getAbsolutePath() + File.separator + finalName);
+            // uuid
 
             BufferedOutputStream stream = new BufferedOutputStream(
                     new FileOutputStream(serverFile));

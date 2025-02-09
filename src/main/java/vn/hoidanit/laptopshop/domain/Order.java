@@ -20,7 +20,7 @@ public class Order {
 
     private double totalPrice;
 
-    // Order -> to One -> User
+    // user id
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

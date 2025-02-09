@@ -20,7 +20,7 @@ public class Role {
 
     private String description;
 
-    // Role -> to Many -> User
+    // role - one => many - users . ctrl + k . press 's'
     @OneToMany(mappedBy = "role")
     private List<User> users;
 
